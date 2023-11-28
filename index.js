@@ -27,10 +27,16 @@ async function run() {
     await client.connect();
 
    const foodsCollection = client.db("studentHostelDB").collection("foods");
+   const membarshipCollection = client.db("studentHostelDB").collection("membarship");
 
    app.get('/foods', async(req, res)=>{
     const result = await foodsCollection.find().toArray();
     res.send(result);
+   })
+
+   app.get('/membarship', async(req, res)=>{
+    const result = await membarshipCollection.find().toArray();
+    res.send(result)
    })
 
 
