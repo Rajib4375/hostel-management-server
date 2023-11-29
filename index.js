@@ -29,6 +29,7 @@ async function run() {
    const foodsCollection = client.db("studentHostelDB").collection("foods");
    const membarshipCollection = client.db("studentHostelDB").collection("membarship");
    const cartCollection = client.db("studentHostelDB").collection("carts");
+   const likeCollection = client.db("studentHostelDB").collection("likes");
 
    app.get('/foods', async(req, res)=>{
     const result = await foodsCollection.find().toArray();
@@ -59,6 +60,18 @@ async function run() {
   app.post('/carts', async(req, res)=>{
     const cartItem = req.body;
     const result = await cartCollection.insertOne(cartItem);
+    res.send(result)
+  })
+
+  // like item
+ app.get('/like', async(req, res)=>{
+  const result = await likeCollection.find().toArray();
+  res.send(result)
+ })
+
+  app.post('/like', async(req, res)=>{
+    const likeItem = req.body;
+    const result = await likeCollection.insertOne(likeItem);
     res.send(result)
   })
 
